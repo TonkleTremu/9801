@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, height=240, user-scalable=no">
-  <title>3DS Canvas Test</title>
-  <style>
-    * { margin: 0; padding: 0; overflow: hidden; }
-    canvas {
-      display: block;
-      background-color: #cce;
-      width: 400px;  /* Set width explicitly */
-      height: 240px; /* Set height explicitly */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Platformer</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas id="gameCanvas" width="400" height="240"></canvas>
-  <script src="game.js"></script>
+    <div id="game">
+        <div id="player"></div>
+        <div class="platform" style="bottom: 50px;"></div>
+        <div class="platform" style="bottom: 100px; left: 200px;"></div>
+    </div>
+    <script src="game.js"></script>
 </body>
 </html>
