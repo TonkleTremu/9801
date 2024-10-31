@@ -2,17 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=400, height=240, user-scalable=no">
   <title>3DS Platformer Game</title>
   <style>
+    /* Remove default margin and padding, hide overflow */
+    * {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    /* Set canvas dimensions */
     canvas {
       display: block;
-      margin: 0 auto;
       background-color: #cce;
     }
   </style>
 </head>
 <body>
+  <!-- Set canvas dimensions to match the 3DS top screen size -->
   <canvas id="gameCanvas" width="400" height="240"></canvas>
   <script src="game.js"></script>
 </body>
