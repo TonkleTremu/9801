@@ -61,6 +61,9 @@ function update() {
 
 function render() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "black";
+  ctx.font = "14px Arial";
+  ctx.fillText("Rendering...", 10, 20);
 
   // Draw player
   ctx.fillStyle = player.color;
