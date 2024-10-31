@@ -64,7 +64,13 @@ function render() {
   for (const platform of platforms) {
     ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
   }
+
+  // Debug message to verify rendering
+  ctx.fillStyle = "white";
+  ctx.font = "14px Arial";
+  ctx.fillText("Rendering Test", 10, 20); // Test text output
 }
+
 
 
 // Keyboard input handling
