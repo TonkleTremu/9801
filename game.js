@@ -62,14 +62,15 @@ function render() {
 
   // Draw player
   ctx.fillStyle = player.color;
-  ctx.fillRect(player.x, player.y, player.width, player.height);
+  ctx.fillRect(Math.floor(player.x), Math.floor(player.y), player.width, player.height);
 
   // Draw platforms
   ctx.fillStyle = "black";
   for (const platform of platforms) {
-    ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+    ctx.fillRect(Math.floor(platform.x), Math.floor(platform.y), platform.width, platform.height);
   }
 }
+
 
 // Keyboard input handling
 window.addEventListener("keydown", (e) => {
