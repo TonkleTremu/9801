@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>3DS Simple Platformer</title>
+    <title>4DS Simple Platformer</title>
     <style>
         body {
             margin: 0;
@@ -102,10 +102,11 @@
 
         // Handle touch/mouse events
         function handleInput(event) {
-            var touch = event.touches ? event.touches[0] : event;
-            var screenWidth = window.innerWidth;
+            event.preventDefault(); // Prevent default touch behavior
+            var touchX = event.touches ? event.touches[0].clientX : event.clientX;
+            var screenWidth = canvas.width;
 
-            if (touch.clientX < screenWidth / 2) {
+            if (touchX < screenWidth / 2) {
                 // Move left
                 moveDirection = -1;
             } else {
@@ -119,18 +120,29 @@
             moveDirection = 0;
         }
 
-        // Jump on touch or click
+        // Jump on tap
         function jumpOnTouch(event) {
             jump();
         }
 
         // Event listeners for touch and mouse
-        window.addEventListener('touchstart', handleInput);
-        window.addEventListener('mousedown', handleInput);
-        window.addEventListener('touchend', stopMovement);
-        window.addEventListener('mouseup', stopMovement);
-        window.addEventListener('touchend', jumpOnTouch);
-        window.addEventListener('mouseup', jumpOnTouch);
+        window.addEventListener('touchstart', function(event) {
+            handleInput(event);
+            jumpOnTouch(event);
+        });
+
+        window.addEventListener('mousedown', function(event) {
+            handleInput(event);
+            jumpOnTouch(event);
+        });
+
+        window.addEventListener('touchend', function(event) {
+            stopMovement();
+        });
+
+        window.addEventListener('mouseup', function(event) {
+            stopMovement();
+        });
 
         // Start the game loop
         update();
