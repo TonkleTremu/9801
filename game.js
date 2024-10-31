@@ -1,9 +1,10 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+const gravity = 0.5;
 const player = {
-  x: 50,
-  y: 180,
+  x: 50,        // Ensure this is within the canvas width
+  y: 180,       // Ensure this is within the canvas height
   width: 30,
   height: 30,
   color: "red",
@@ -13,10 +14,10 @@ const player = {
   jumpForce: -10
 };
 
-const gravity = 0.5;
 const platforms = [
-  { x: 0, y: 210, width: 400, height: 30 }
+  { x: 0, y: 210, width: 400, height: 30 } // Ensure the platform fits within the canvas
 ];
+
 
 // Input state
 const input = { left: false, right: false, jump: false };
