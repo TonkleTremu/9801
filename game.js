@@ -29,36 +29,28 @@ setInterval(() => {
 
 function update() {
   // Apply gravity
-  if (!player.grounded) {
-    player.velocityY += gravity;
-  }
+  // if (!player.grounded) {
+  //   player.velocityY += gravity;
+  // }
 
   // Horizontal movement
   if (input.left) player.x -= player.speed;
   if (input.right) player.x += player.speed;
 
   // Vertical movement
-  player.y += player.velocityY;
+  player.y += player.velocityY; // Keep this for testing
 
   // Check for platform collisions
-  player.grounded = false; // Reset grounded state
-  for (const platform of platforms) {
-    if (
-      player.x < platform.x + platform.width &&
-      player.x + player.width > platform.x &&
-      player.y < platform.y + platform.height &&
-      player.y + player.height > platform.y
-    ) {
-      player.y = platform.y - player.height; // Adjust position on top of platform
-      player.velocityY = 0; // Reset vertical velocity
-      player.grounded = true; // Player is on the platform
-    }
-  }
+  // player.grounded = false; // Reset grounded state
+  // for (const platform of platforms) {
+  //   // ... existing collision code ...
+  // }
 
   // Prevent the player from moving off the canvas
   if (player.x < 0) player.x = 0;
   if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
 }
+
 
 function render() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
