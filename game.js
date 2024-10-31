@@ -68,14 +68,14 @@ function render() {
 
 
 // Keyboard input handling
-window.addEventListener("keydown", (e) => {
+/*window.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") input.left = true;
   if (e.key === "ArrowRight") input.right = true;
   if (e.key === " " && player.grounded) { // Space bar for jump
     player.velocityY = player.jumpForce;
     player.grounded = false;
   }
-});
+});*/
 
 window.addEventListener("keyup", (e) => {
   if (e.key === "ArrowLeft") input.left = false;
