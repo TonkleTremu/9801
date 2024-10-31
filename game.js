@@ -68,12 +68,18 @@ function render() {
   // Draw player
   ctx.fillStyle = player.color;
   ctx.fillRect(Math.floor(player.x), Math.floor(player.y), player.width, player.height);
+  ctx.fillStyle = "black";
+  ctx.font = "14px Arial";
+  ctx.fillText("Rendering...", 10, 20);
 
   // Draw platforms
   ctx.fillStyle = "black";
   for (const platform of platforms) {
     ctx.fillRect(Math.floor(platform.x), Math.floor(platform.y), platform.width, platform.height);
   }
+  ctx.fillStyle = "black";
+  ctx.font = "14px Arial";
+  ctx.fillText("Rendering...", 10, 20);
 }
 
 
