@@ -2,11 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=400, height=240, user-scalable=no">
+  <meta name="viewport" content="width=device-width, height=240, user-scalable=no">
   <title>3DS Canvas Test</title>
   <style>
     * { margin: 0; padding: 0; overflow: hidden; }
-    canvas { display: block; background-color: #cce; }
+    canvas {
+      display: block;
+      background-color: #cce;
+      width: 400px;  /* Set width explicitly */
+      height: 240px; /* Set height explicitly */
+    }
   </style>
 </head>
 <body>
