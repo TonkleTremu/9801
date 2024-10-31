@@ -66,6 +66,7 @@ function render() {
   }
 }
 
+
 // Keyboard input handling
 window.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") input.left = true;
