@@ -4,14 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Platformer</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #gameCanvas {
+            background: #87CEEB; /* Sky blue */
+            display: block;
+            margin: 0 auto;
+        }
+        .platform {
+            background: #8B4513; /* Brown */
+            position: absolute;
+            width: 100px;
+            height: 10px;
+        }
+        #player {
+            background: #FF6347; /* Tomato */
+            position: absolute;
+            width: 30px;
+            height: 30px;
+        }
+    </style>
 </head>
 <body>
-    <div id="game">
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
         <div id="player"></div>
-        <div class="platform" style="bottom: 50px;"></div>
-        <div class="platform" style="bottom: 100px; left: 200px;"></div>
     </div>
-    <script src="game.js"></script>
+    <script>
+        var canvas = document.getElementById('gameCanvas');
+        var context = canvas.getContext('2d');
+
+        // Player settings
+        var player = document.getElementById('player');
+        var playerX = 100;
+        var playerY = 350;
+        var playerVelocityY = 0;
+        var gravity = 0.5;
+        var jumpStrength = 10;
+        var isJumping = false;
+
+        // Platforms
+        var platforms = [
+            { x: 100, y: 350, width: 100, height: 10 },
+            { x: 300, y: 250, width: 100, height: 10 },
+            { x: 500, y: 150, width: 100, height: 10 }
+        ];
+
+        function drawPlayer() {
+            player.style.left = playerX + 'px';
+            player.style.top = playerY + 'px';
+        }
+
+        function drawPlatforms() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = '#8B4513'; // Brown
+            platforms.forEach(function(platform) {
+                context.fillRect(platform.x, platform.y, platform.width, platform.height);
+            });
+        }
+
+        function update() {
+            // Gravity effect
+            if (!isJumping) {
+                playerVelocityY += gravity;
+                playerY += playerVelocityY;
+
+                // Check for collision with the ground
+                if (playerY + 30 > canvas.height) {
+                    playerY = canvas.height - 30;
+                    playerVelocityY = 0;
+                }
+            }
+
+            // Check for collision with platforms
+            platforms.forEach(function(platform) {
+                if (playerX + 30 > platform.x && playerX < platform.x + platform.width &&
+                    playerY + 30 > platform.y && playerY + 30 < platform.y + platform.height) {
+                    playerY = platform.y - 30;
+                    playerVelocityY = 0;
+                    isJumping = false;
+                }
+            });
+
+            drawPlatforms();
+            drawPlayer();
+            requestAnimationFrame(update);
+        }
+
+        // Jump function
+        function jump() {
+            if (!isJumping) {
+                playerVelocityY = -jumpStrength;
+                isJumping = true;
+            }
+        }
+
+        // Keyboard controls
+        window.addEventListener('keydown', function(event) {
+            if (event.keyCode === 32) { // Space key
+                jump();
+            }
+        });
+
+        // Start the game loop
+        update();
+    </script>
 </body>
 </html>
