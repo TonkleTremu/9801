@@ -22,11 +22,12 @@ const platforms = [
 const input = { left: false, right: false, jump: false };
 
 // Game loop
-function gameLoop() {
+// Replace gameLoop with setInterval for 3DS compatibility
+setInterval(() => {
   update();
   render();
-  requestAnimationFrame(gameLoop);
-}
+}, 1000 / 30);  // Run at 30 FPS for better performance on the 3DS
+
 
 function update() {
   // Apply gravity
