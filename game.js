@@ -99,4 +99,4 @@ window.addEventListener("keyup", (e) => {
 });
 
 // Start the game loop
-gameLoop();
+setInterval();
