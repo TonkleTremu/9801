@@ -1,90 +1,44 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-const player = {
-  x: 50,
-  y: 180,
-  width: 30,
-  height: 30,
-  color: "red",
-  velocityY: 0,
-  speed: 2,
-  grounded: false,
-  jumpForce: -10
-};
-
-const gravity = 0.5;
-const platforms = [
-  { x: 0, y: 210, width: 400, height: 30 }
-];
-
-// Input state
-const input = { left: false, right: false, jump: false };
-
-// Game loop
-function gameLoop() {
-  update();
-  render();
-  requestAnimationFrame(gameLoop);
+// Check if the 3DS browser successfully initializes the canvas
+if (ctx) {
+  // Draw a single blue square in the center
+  ctx.fillStyle = "blue";
+  ctx.fillRect(150, 90, 100, 100);  // Centered square on 400x240 canvas
+} else {
+  // If the 3DS browser fails to get a 2D context, display a message
+  document.body.innerHTML = "<p>Canvas not supported.</p>";
 }
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
 
-function update() {
-  // Apply gravity
-  if (!player.grounded) {
-    player.velocityY += gravity;
-  }
+if (ctx) {
+  // Draw blue background square
+  ctx.fillStyle = "blue";
+  ctx.fillRect(150, 90, 100, 100);
 
-  // Horizontal movement
-  if (input.left) player.x -= player.speed;
-  if (input.right) player.x += player.speed;
-
-  // Vertical movement
-  player.y += player.velocityY;
-
-  // Check for platform collisions
-  player.grounded = false;
-  for (const platform of platforms) {
-    if (
-      player.x < platform.x + platform.width &&
-      player.x + player.width > platform.x &&
-      player.y < platform.y + platform.height &&
-      player.y + player.height > platform.y
-    ) {
-      player.y = platform.y - player.height;
-      player.velocityY = 0;
-      player.grounded = true;
-    }
-  }
+  // Draw player as a red square
+  ctx.fillStyle = "red";
+  ctx.fillRect(50, 180, 30, 30);  // Starting position for player
+} else {
+  document.body.innerHTML = "<p>Canvas not supported.</p>";
 }
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
 
-function render() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+if (ctx) {
+  // Draw blue background square
+  ctx.fillStyle = "blue";
+  ctx.fillRect(150, 90, 100, 100);
 
-  // Draw player
-  ctx.fillStyle = player.color;
-  ctx.fillRect(player.x, player.y, player.width, player.height);
+  // Draw player as a red square
+  ctx.fillStyle = "red";
+  ctx.fillRect(50, 180, 30, 30);
 
-  // Draw platforms
+  // Draw platform as a black rectangle
   ctx.fillStyle = "black";
-  for (const platform of platforms) {
-    ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
-  }
+  ctx.fillRect(0, 210, 400, 30);  // Platform across the bottom of the screen
+} else {
+  document.body.innerHTML = "<p>Canvas not supported.</p>";
 }
-
-// Keyboard input handling
-window.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowLeft") input.left = true;
-  if (e.key === "ArrowRight") input.right = true;
-  if (e.key === " " && player.grounded) { // Space bar for jump
-    player.velocityY = player.jumpForce;
-    player.grounded = false;
-  }
-});
-
-window.addEventListener("keyup", (e) => {
-  if (e.key === "ArrowLeft") input.left = false;
-  if (e.key === "ArrowRight") input.right = false;
-});
-
-// Start the game loop
-gameLoop();
