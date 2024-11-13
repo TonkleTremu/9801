@@ -1,14 +1,49 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport", content="width=device-width, initial-scale=1.0">
-        <title>Omni-Console Game</title>
-        <link rel="stylesheet" href="dino.css">
-        <script src="game.js"></script>
-    </head>
-    <body>
-        <h1>Omni-Console Game</h1>
-        <canvas id="board"></canvas>
-    </body>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<body>
+<title>Square Maker (Makes Squares!)</title>
+<button type="button" onclick="refreshscreen(); piechart()">Refresh</button>
+<p>Width:</p><button type="button" onclick="squaresize += 10; refreshscreen()">+</button><button type="button" onclick="squaresize -= 10; refreshscreen()">-</button><br>
+<p>Height:</p><button type="button" onclick="rectsize += 10; refreshscreen()">+</button><button type="button" onclick="rectsize -= 10; refreshscreen()">-</button><br>
+
+<p>Background Width:</p><button type="button" onclick="bgsquaresize += 10; refreshscreen()">+</button><button type="button" onclick="bgsquaresize -= 10; refreshscreen()">-</button><br>
+<p>Background Height:</p><button type="button" onclick="bgrectsize += 10; refreshscreen()">+</button><button type="button" onclick="bgrectsize -= 10; refreshscreen()">-</button><br>
+
+<p id="Text1"></p>
+<canvas id="myCanvas" width="3000" height="3000"></canvas>
+<script>
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+var squaresize = 0
+var rectsize = 0
+var bgsquaresize = 150
+var bgrectsize = 150
+function refreshscreen() {
+// Non-Specific Stuff
+ctx.clearRect(0,0,1000,1000)
+ctx.strokeStyle = "#000000";
+
+// Background Square
+ctx.fillStyle = "#A5FF99";
+ctx.strokeRect(5, 5, bgsquaresize, bgrectsize);
+ctx.fillRect(5, 5, bgsquaresize, bgrectsize);
+
+// Variant Yellow Square (Top Left)
+ctx.fillStyle = "#FFFB94";
+ctx.strokeRect(5, 5, squaresize, rectsize);
+ctx.fillRect(5, 5, squaresize, rectsize);
+
+// Variant Red Square (Top Right)
+ctx.fillStyle = "#FF0000";
+ctx.strokeRect(5 + squaresize, 5, bgsquaresize  - squaresize, rectsize);
+ctx.fillRect(5 + squaresize, 5, bgsquaresize  - squaresize, rectsize);
+
+// Variant Blue Square (Bottom Left)
+ctx.fillStyle = "#0000FF";
+ctx.strokeRect(5, 5 + rectsize, squaresize, bgrectsize - rectsize);
+ctx.fillRect(5, 5 + rectsize, squaresize, bgrectsize - rectsize);
+}
+</script>
+</body>
 </html>
